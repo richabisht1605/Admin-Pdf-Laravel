@@ -15,7 +15,7 @@
             <div class="add">
                 <div class="addpage">Upload Image</div> 
                     <form method="post" enctype="multipart/form-data" action="{{ route('upload.data') }}">
-                        {{csrf_field()}}
+                        @csrf
                     <!-- table starts -->
                     <input type="hidden" name="edited" />
                         <table class="table3" border ="1px solid" >												

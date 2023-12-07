@@ -14,8 +14,8 @@
         <!--div starts here--->			    					 
             <div class="add">
                 <div class="addpage">Upload Csv</div> 
-                    <form method="">
-                        {{csrf_field()}}
+                    <form method="post" id="uploadForm" action="" enctype="multipart/form-data">    
+                    @csrf
                     <!-- table starts -->
                     <input type="hidden" name="edited" />
                         <table class="table3" border ="1px solid" >												
@@ -23,30 +23,16 @@
                                 <td>Upload Csv
                                 </td>
                                 <td>
-                                    <input type="file" name="file"/>
-                                </td>
-                            <tr>
-                           					 
-                                <td> </td>
-                                <td>
-                                    
-                                    <input type="checkbox" name=""/>Sku<br><br>
-                                    <input type="checkbox" name=""/>Quantity<br><br>
-                                    <input type="checkbox" name=""/>Order ID<br><br>
-                                    <input type="checkbox" name=""/>Order Notes<br>
-                                    <input type="checkbox" name=""/>Invoice Number <br>
-                                   
-
-                                </td>
-                            </tr>								 
+                                    <input type="file" name="file" />
+                                </td>							 
                            
                             													 				
                         </table>
                         
                     <!-- table3 ends -->
                     
-                <input type="submit" value="Pdf" class="save" name="save"/>
-                <input type="submit" value="image" class="save" name="save"/>
+                <input type="submit" value="Pdf" class="save" name="pdf" onclick="setAction('pdf')"/>
+                <input type="submit" value="image" class="save" name="image" onclick="setAction('image')"/>
               
                 </form>
             </div>
@@ -55,4 +41,15 @@
     <!--right div ends--->
     </div>
     <!----middlecontainer ends -->
+    <script>
+        function setAction(actionType) {
+            var form = document.getElementById('uploadForm');
+    
+            if (actionType === 'pdf') {
+                form.action = "{{ route('generate.pdf') }}";
+            } else if (actionType === 'image') {
+                form.action = "{{ route('image.generate') }}";
+            }
+        }
+    </script>
 @endsection
